@@ -1,64 +1,79 @@
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+// app/(drawer)/_layout.tsx
+import {
+  Feather,
+  Ionicons,
+  MaterialCommunityIcons,
+  MaterialIcons,
+} from "@expo/vector-icons";
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
 import { Drawer } from "expo-router/drawer";
 import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function DrawerLayout() {
   return (
     <Drawer
       screenOptions={{
-        drawerActiveBackgroundColor: "#EDE9FE",
-        drawerActiveTintColor: "#5B21B6",
-        drawerInactiveTintColor: "#6B7280",
+        headerShown: true,
+        drawerType: "front",
+        overlayColor: "rgba(0,0,0,0.25)",
+        drawerStyle: {
+          width: 300,
+          backgroundColor: "#fff",
+          borderTopRightRadius: 28,
+          borderBottomRightRadius: 28,
+        },
         drawerItemStyle: {
           borderRadius: 999,
           marginVertical: 6,
           marginHorizontal: 12,
         },
-        drawerLabelStyle: { fontWeight: "600" },
-        drawerStyle: {
-          width: 300,
-          borderTopRightRadius: 24,
-          borderBottomRightRadius: 24,
-        },
+        drawerLabelStyle: { fontSize: 15, fontWeight: "600" },
+        drawerActiveBackgroundColor: "#FEE2E2",
+        drawerActiveTintColor: "#EF4444",
+        drawerInactiveTintColor: "#6B7280",
       }}
       drawerContent={(props) => (
         <DrawerContentScrollView
           {...props}
           contentContainerStyle={{ paddingTop: 0 }}
         >
-          {/* Header morado con avatar */}
-          <View
-            style={{
-              backgroundColor: "#5B21B6",
-              margin: 12,
-              marginTop: 16,
-              borderRadius: 20,
-              padding: 16,
-              alignItems: "center",
-            }}
-          >
+          <SafeAreaView edges={["top", "left", "right"]}>
             <View
               style={{
-                width: 72,
-                height: 72,
-                borderRadius: 999,
-                backgroundColor: "#FFF",
+                backgroundColor: "#FFE4E6",
+                marginHorizontal: 12,
+                marginTop: 12,
+                marginBottom: 6,
+                padding: 16,
+                borderRadius: 20,
+                flexDirection: "row",
                 alignItems: "center",
-                justifyContent: "center",
+                gap: 12,
               }}
             >
-              <Text
-                style={{ color: "#5B21B6", fontWeight: "800", fontSize: 18 }}
+              <View
+                style={{
+                  backgroundColor: "#fff",
+                  width: 56,
+                  height: 56,
+                  borderRadius: 16,
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               >
-                JD
+                <Ionicons name="videocam" size={28} color="#EF4444" />
+              </View>
+              <Text
+                style={{ fontSize: 20, fontWeight: "700", color: "#EF4444" }}
+              >
+                Joyts
               </Text>
             </View>
-          </View>
-
+          </SafeAreaView>
           <DrawerItemList {...props} />
         </DrawerContentScrollView>
       )}
@@ -66,21 +81,38 @@ export default function DrawerLayout() {
       <Drawer.Screen
         name="home/index"
         options={{
-          drawerLabel: "Inicio",
           title: "Inicio",
+
           drawerIcon: ({ color, size }) => (
             <Ionicons name="home-outline" size={size} color={color} />
           ),
         }}
       />
       <Drawer.Screen
-        name="productos/(tabs)"
+        name="popular/index"
         options={{
-          drawerLabel: "Productos",
-          title: "Productos",
+          title: "Populares",
+          drawerIcon: ({ color, size }) => (
+            <MaterialIcons name="grid-view" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="top/index"
+        options={{
+          title: "Mejores calificadas",
+          drawerIcon: ({ color, size }) => (
+            <Feather name="thumbs-up" size={size} color={color} />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="upcoming/index"
+        options={{
+          title: "Próximamente en cines",
           drawerIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="storefront-outline"
+              name="calendar-month-outline"
               size={size}
               color={color}
             />
@@ -88,36 +120,28 @@ export default function DrawerLayout() {
         }}
       />
       <Drawer.Screen
-        name="sucursales/index"
+        name="all-movies/index"
         options={{
-          drawerLabel: "Sucursales",
-          title: "Sucursales",
+          title: "Todas las películas",
           drawerIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="map-marker-outline"
+              name="ticket-outline"
               size={size}
               color={color}
             />
-          ),
-        }}
-      />
-      <Drawer.Screen
-        name="usuario/index"
-        options={{
-          drawerLabel: "Usuario",
-          title: "Mi cuenta",
-          drawerIcon: ({ color, size }) => (
-            <Ionicons name="person-circle-outline" size={size} color={color} />
           ),
         }}
       />
       <Drawer.Screen
         name="about/index"
         options={{
-          drawerLabel: "About",
-          title: "Acerca de la tienda",
+          title: "Acerca de Joyts",
           drawerIcon: ({ color, size }) => (
-            <Ionicons name="person-circle-outline" size={size} color={color} />
+            <Ionicons
+              name="information-circle-outline"
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
